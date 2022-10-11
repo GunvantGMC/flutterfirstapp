@@ -16,88 +16,130 @@ void main() {
   );
 }
 
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 20;
-
-  void _decreamentCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter--;
-    });
-  }
+class _HomeScreenState extends State<HomeScreen> {
+  int widgetPosIndex = -1;
+  List<String> urlList = [
+    "https://timesofindia.indiatimes.com/?from=mdr",
+    "https://music.youtube.com/browse/FEmusic_language_selection",
+    "https://9gag.com/video",
+    "https://wallpapercave.com/",
+    "https://www.arkadium.com/free-online-games/arcade/",
+    "https://www.accuweather.com/",
+    "https://chia-anime.su/",
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        backgroundColor: Colors.amber.shade300,
+        centerTitle: true,
+        title: Text(
+          'Jai Gajanan Mauli',
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.white), //appbar name styling
+        ),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'This button will decrease the counter from 20',
+      drawer: Drawer(
+        backgroundColor: Colors.amber.shade200,
+        //Drawer code
+        child: ListView(
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            ListTile(
+              //News Tile
+              onTap: () => updateIndex(index: 0),
+              trailing: Icon(Icons.newspaper_rounded),
+              title: Text(
+                'News',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            ListTile(
+              //Music Tile
+              onTap: () => updateIndex(index: 1),
+              trailing: Icon(Icons.music_note_rounded),
+              title: Text(
+                'Music',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+            ListTile(
+              //Videos Tile
+              onTap: () => updateIndex(index: 2),
+              trailing: Icon(Icons.video_collection_rounded),
+              title: Text(
+                'Videos',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+            ListTile(
+              //Wallpaper Tile
+              onTap: () => updateIndex(index: 3),
+              trailing: Icon(Icons.wallpaper_rounded),
+              title: Text(
+                'Wallpaper',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+            ListTile(
+              //Games Tile
+              onTap: () => updateIndex(index: 4),
+              trailing: Icon(Icons.games_rounded),
+              title: Text(
+                'Games',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+            ListTile(
+              //Weather Tile
+              // onTap: () {},
+              onTap: () => updateIndex(index: 5),
+              trailing: Icon(Icons.wb_sunny_rounded),
+              title: Text(
+                'Weather',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+            ListTile(
+              onTap: () => updateIndex(index: 6),
+              trailing: Icon(Icons.movie_creation_rounded),
+              title: Text(
+                //Anime Tile
+                'Anime',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _decreamentCounter,
-        tooltip: 'Decreament',
-        child: const Icon(Icons.remove),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
