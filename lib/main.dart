@@ -36,7 +36,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _divideCounter(){
+  void _multiplyCounter() {
+    setState(() {
+      _counter = _counter * 2;
+    });
+  }
+
+  void _divideCounter() {
     setState(() {
       _counter = _counter ~/ 2;
     });
@@ -62,9 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -73,7 +77,11 @@ class _MyHomePageState extends State<MyHomePage> {
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
           ),
-          
+          FloatingActionButton(
+            tooltip: 'Multiplication',
+            onPressed: _multiplyCounter,
+            child: const Icon(Icons.close_rounded),
+          ),
           FloatingActionButton(
             onPressed: _divideCounter,
             tooltip: 'Divide',
@@ -81,7 +89,6 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-    
     );
   }
 }
