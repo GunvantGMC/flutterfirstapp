@@ -29,9 +29,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 20;
-  TextEditingController num1controller = new TextEditingController();
-  TextEditingController num2controller = new TextEditingController();
-  String result = "0";
 
   void _decreamentCounter() {
     setState(() {
@@ -59,75 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding:
-                  EdgeInsets.only(left: 100, right: 100, top: 30, bottom: 20),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: num1controller,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'First Number',
-                  hintText: 'Enter First Number',
-                ),
-              ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'The button will do the dividation and subtraction',
             ),
-            Padding(
-              padding:
-                  EdgeInsets.only(left: 100, right: 100, top: 10, bottom: 20),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: num2controller,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Second Number',
-                  hintText: 'Enter Second Number',
-                ),
-              ),
-            ),
-            Wrap(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 200, right: 50, top: 10, bottom: 20),
-                  child: ElevatedButton(
-                    child: Text("Addition"),
-                    onPressed: () {
-                      setState(() {
-                        int sum = int.parse(num1controller.text) +
-                            int.parse(num2controller.text);
-                        result = sum.toString();
-                      });
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 150, right: 200, top: 10, bottom: 20),
-                  child: Text(
-                    'Result : $result',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 250, right: 200, top: 50, bottom: 20),
-                  child: Text(
-                    'The button will do the dividation and subtraction',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.only(left: 450, right: 0, top: 0, bottom: 20),
-                  child: Text(
-                    '$_counter',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ),
-              ],
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
