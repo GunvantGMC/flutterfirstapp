@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 20;
 
+  String enteredText = "";
+
   void _decreamentCounter() {
     setState(() {
       _counter--;
@@ -42,27 +45,81 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  //Toast Example
+  void _toastText(){
+    Fluttertoast.showToast(
+        msg: enteredText,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'The button will do the dividation and subtraction',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
       
+      body: Center(
+          child: Column(
+            children: [
+
+              Padding(
+                padding: EdgeInsets.only(left: 150, right: 150, top: 20, bottom: 0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter any text',
+                  ),
+                   onChanged: (newText){
+                    enteredText = newText;
+                  },
+              ),  
+                 
+                ),
+
+            Container(
+              margin: EdgeInsets.only(left: 150, right: 150, top: 30, bottom: 0),
+              child: RaisedButton(
+              onPressed: _toastText,
+              child: Text('Click Here', style: TextStyle(fontSize: 20, fontFamily: 'Times new roman')),
+              color: Colors.green,
+              padding: EdgeInsets.all(15),
+            ),
+            ),
+            
+            Padding(
+            padding: EdgeInsets.only(left: 150, right: 150, top: 70, bottom: 0),
+            child: Text(
+                'The button will do the dividation and subtraction',
+                style: TextStyle(fontFamily: 'Times new roman' , fontSize: 30),
+            ),
+              ),
+
+
+              Padding(
+              padding: EdgeInsets.only(left: 150, right: 150, top: 70, bottom: 0),
+              child: Text(
+              '$_counter',
+              style: TextStyle(fontFamily: 'Times new roman', fontSize: 30),
+              ),
+              ),
+
+              
+
+            
+            ],
+          ),
+        
+      ),
+
+
+
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       
       floatingActionButton: Row(
@@ -73,12 +130,13 @@ class _MyHomePageState extends State<MyHomePage> {
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
           ),
-          
+
           FloatingActionButton(
             onPressed: _divideCounter,
             tooltip: 'Divide',
             child: const Icon(Icons.percent),
-          )
+          ),
+          
         ],
       ),
     
