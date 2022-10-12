@@ -1,6 +1,7 @@
+import 'package:flutterapp/EnglishNews.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:ck/EnglishNews.dart';
-import 'package:ck/NewsApi.dart';
+//import 'package:onestop/EnglishNews.dart';
+//import 'package:ck/NewsApi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -42,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.amber.shade300,
         centerTitle: true,
         title: Text(
-          'Jai Gajanan Mauli',
+          'OneStop',
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 25,
@@ -159,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           image: DecorationImage(
               //image insertion
-              image: AssetImage("assets/GM.jpg"),
+              image: AssetImage("assets/SS.jpg"),
               fit: BoxFit.fill),
         ),
         child: getChildByIndexPos(
@@ -168,9 +169,54 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-    Future<void> _launchUrl(strUrl) async {
+
+  Future<void> _launchUrl(strUrl) async {
     final Uri _url = Uri.parse(strUrl);
     if (!await launchUrl(_url)) {
       throw 'Could not launch $_url';
     }
   }
+
+  updateIndex({index}) async {
+    print('object');
+    setState(() => widgetPosIndex = index);
+    if (index != -1) await _launchUrl(urlList[index]);
+  }
+
+  getChildByIndexPos({required int index}) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    Widget widget = Text("");
+    switch (index) {
+      case -1:
+        widget = Container();
+        break;
+      case 0: //News Marathi
+        //widget = _launchURL();
+        widget = Text("data");
+        break;
+      case 1: //News
+        widget = HindiWidget();
+        break;
+      case 2: // Music
+        widget = EnglishWidget();
+        break;
+      case 3: // Video
+        widget = EnglishWidget();
+        break;
+      case 4: //Wallpaper
+        widget = EnglishWidget();
+        break;
+      case 5: //Weather
+        widget = EnglishWidget();
+        break;
+      case 6: //Anime
+        widget = EnglishWidget();
+        break;
+      case 7: //Poems
+        widget = EnglishWidget();
+        break;
+    }
+    return widget;
+  }
+}
