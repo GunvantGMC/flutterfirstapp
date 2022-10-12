@@ -1,4 +1,5 @@
 import 'package:flutterapp/EnglishNews.dart';
+import 'package:flutterapp/issue.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import 'package:onestop/EnglishNews.dart';
 //import 'package:ck/NewsApi.dart';
@@ -12,7 +13,7 @@ Future<String> loadAsset() async {
 void main() {
   runApp(
     MaterialApp(
-      home: HomeScreen(),
+      home: buttondemo_(),
     ),
   );
 }
