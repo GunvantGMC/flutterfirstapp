@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,9 +30,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 20;
-  TextEditingController num1controller = new TextEditingController();
-  TextEditingController num2controller = new TextEditingController();
-  String result = "0";
+
+  String enteredText = "";
 
   void _decreamentCounter() {
     setState(() {
@@ -39,16 +39,23 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _multiplyCounter() {
-    setState(() {
-      _counter = _counter * 2;
-    });
-  }
-
-  void _divideCounter() {
+  void _divideCounter(){
     setState(() {
       _counter = _counter ~/ 2;
     });
+  }
+
+  //Toast Example
+  void _toastText(){
+    Fluttertoast.showToast(
+        msg: enteredText,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
   }
 
   @override
@@ -57,82 +64,64 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      
       body: Center(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          children: [
+          child: Column(
+            children: [
+
+              Padding(
+                padding: EdgeInsets.only(left: 150, right: 150, top: 20, bottom: 0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter any text',
+                  ),
+                   onChanged: (newText){
+                    enteredText = newText;
+                  },
+              ),  
+                 
+                ),
+
+            Container(
+              margin: EdgeInsets.only(left: 150, right: 150, top: 30, bottom: 0),
+              child: RaisedButton(
+              onPressed: _toastText,
+              child: Text('Click Here', style: TextStyle(fontSize: 20, fontFamily: 'Times new roman')),
+              color: Colors.green,
+              padding: EdgeInsets.all(15),
+            ),
+            ),
+            
             Padding(
-              padding:
-                  EdgeInsets.only(left: 100, right: 100, top: 30, bottom: 20),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: num1controller,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'First Number',
-                  hintText: 'Enter First Number',
-                ),
+            padding: EdgeInsets.only(left: 150, right: 150, top: 70, bottom: 0),
+            child: Text(
+                'The button will do the dividation and subtraction',
+                style: TextStyle(fontFamily: 'Times new roman' , fontSize: 30),
+            ),
               ),
-            ),
-            Padding(
-              padding:
-                  EdgeInsets.only(left: 100, right: 100, top: 10, bottom: 20),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: num2controller,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Second Number',
-                  hintText: 'Enter Second Number',
-                ),
+
+
+              Padding(
+              padding: EdgeInsets.only(left: 150, right: 150, top: 70, bottom: 0),
+              child: Text(
+              '$_counter',
+              style: TextStyle(fontFamily: 'Times new roman', fontSize: 30),
               ),
-            ),
-            Wrap(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 200, right: 50, top: 10, bottom: 20),
-                  child: ElevatedButton(
-                    child: Text("Addition"),
-                    onPressed: () {
-                      setState(() {
-                        int sum = int.parse(num1controller.text) +
-                            int.parse(num2controller.text);
-                        result = sum.toString();
-                      });
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 150, right: 200, top: 10, bottom: 20),
-                  child: Text(
-                    'Result : $result',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 250, right: 200, top: 50, bottom: 20),
-                  child: Text(
-                    'The button will do the dividation and subtraction',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.only(left: 450, right: 0, top: 0, bottom: 20),
-                  child: Text(
-                    '$_counter',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+
+              
+
+            
+            ],
+          ),
+        
       ),
+
+
+
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -141,18 +130,16 @@ class _MyHomePageState extends State<MyHomePage> {
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
           ),
-          FloatingActionButton(
-            tooltip: 'Multiplication',
-            onPressed: _multiplyCounter,
-            child: const Icon(Icons.close_rounded),
-          ),
+
           FloatingActionButton(
             onPressed: _divideCounter,
             tooltip: 'Divide',
             child: const Icon(Icons.percent),
-          )
+          ),
+          
         ],
       ),
+    
     );
   }
 }
