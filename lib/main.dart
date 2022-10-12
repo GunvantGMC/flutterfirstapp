@@ -174,3 +174,46 @@ class _HomeScreenState extends State<HomeScreen> {
       throw 'Could not launch $_url';
     }
   }
+updateIndex({index}) async {
+    print('object');
+    setState(() => widgetPosIndex = index);
+    if (index != -1) await _launchUrl(urlList[index]);
+  }
+
+  getChildByIndexPos({required int index}) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    Widget widget = Text("");
+    switch (index) {
+      case -1:
+        widget = Container();
+        break;
+      case 0: //News Marathi
+        //widget = _launchURL();
+        widget = Text("data");
+        break;
+      case 1: //News
+        widget = HindiWidget();
+        break;
+      case 2: // Music
+        widget = EnglishWidget();
+        break;
+      case 3: // Video
+        widget = EnglishWidget();
+        break;
+      case 4: //Wallpaper
+        widget = EnglishWidget();
+        break;
+      case 5: //Weather
+        widget = EnglishWidget();
+        break;
+      case 6: //Anime
+        widget = EnglishWidget();
+        break;
+      case 7: //Poems
+        widget = EnglishWidget();
+        break;
+    }
+    return widget;
+  }
+}
