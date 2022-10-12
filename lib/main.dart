@@ -140,6 +140,37 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w500),
               ),
             ),
+            ListTile(
+              onTap: () => updateIndex(index: 7),
+              trailing: Icon(Icons.auto_stories_rounded),
+              title: Text(
+                //Poems Tile
+                'Poems',
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
           ],
         ),
       ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              //image insertion
+              image: AssetImage("assets/GM.jpg"),
+              fit: BoxFit.fill),
+        ),
+        child: getChildByIndexPos(
+          index: widgetPosIndex,
+        ),
+      ),
+    );
+  }
+    Future<void> _launchUrl(strUrl) async {
+    final Uri _url = Uri.parse(strUrl);
+    if (!await launchUrl(_url)) {
+      throw 'Could not launch $_url';
+    }
+  }
